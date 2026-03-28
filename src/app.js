@@ -6,13 +6,14 @@ import { errorHandler, notFoundHandler } from './middleware/error.middleware.js'
 const app = express();
 
 
-app.use(
-  cors({
-    origin: '*',
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  })
-);
-app.options('*', cors()); // preflight for all routes
+app.use(cors({
+  origin: "https://nxtbuild.vercel.app", 
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
+
+app.options('*', cors()); 
 
 app.use(express.json({ limit: '10mb' }));
 
