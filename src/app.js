@@ -5,15 +5,19 @@ import { errorHandler, notFoundHandler } from './middleware/error.middleware.js'
 
 const app = express();
 
-
 app.use(cors({
-  origin: "https://nxtbuild.vercel.app", 
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: "https://nxtbuild.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 
+// ✅ Handle preflight explicitly
+app.options("*", cors({
+  origin: "https://nxtbuild.vercel.app",
+  credentials: true
+}));
 
-app.options('*', cors()); 
 
 app.use(express.json({ limit: '10mb' }));
 
